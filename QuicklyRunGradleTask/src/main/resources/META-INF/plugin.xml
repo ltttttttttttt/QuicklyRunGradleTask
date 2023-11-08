@@ -1,0 +1,55 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!--插件id-->
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>com.lt.QuicklyRunGradleTask</id>
+
+    <!--插件名称-->
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+    <name>QuicklyRunGradleTask</name>
+
+    <!--开发者信息-->
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor email="lt.dygzs@qq.com" url="https://github.com/ltttttttttttt">lt</vendor>
+
+    <!--插件说明-->
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    <description><![CDATA[
+    Simple and fast execution of Gradle tasks<br><br>
+    The function can be found in Tools>QuicklyRunGradleTask, or directly using the Alt+V shortcut keys
+  ]]></description>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.gradle</depends>
+
+    <!--依赖的其他插件能力-->
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+
+    </extensions>
+
+    <!--插件动作-->
+    <actions>
+        <group id="QuicklyRunGradleTask" text="QuicklyRunGradleTask" popup="true">
+            <add-to-group group-id="ToolsMenu" anchor="after" relative-to-action="ShowSettings"/>
+            <action id="com.lt.quicklyRunGradleTask.ConfigAction" class="com.lt.quicklyRunGradleTask.ConfigAction"
+                    text="Config QuicklyRunGradleTask"
+                    description="QuicklyRunGradleTask"/>
+            <!--将下面的 action tag 内容添加到 plugin.xml 里-->
+            <action id="com.lt.quicklyRunGradleTask.QuicklyRunGradleTaskAction"
+                    class="com.lt.quicklyRunGradleTask.QuicklyRunGradleTaskAction"
+                    text="QuicklyRunGradleTask Action">
+                <!--这里的作用是将此 action 添加到 IDEA tools 下拉菜单里的最后一个位置-->
+                <!--<add-to-group group-id="QuicklyRunGradleTask" anchor="last"/>-->
+                <!--设置快捷键-->
+                <keyboard-shortcut keymap="$default" first-keystroke="alt v"/>
+            </action>
+        </group>
+    </actions>
+</idea-plugin>
