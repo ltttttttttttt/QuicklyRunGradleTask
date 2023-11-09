@@ -37,16 +37,25 @@ class QuicklyRunGradleTaskAction : DumbAwareAction() {
             val projectConnection = gradleConnector.forProjectDirectory(File(project.basePath)).connect()
             projectConnection.newBuild().forTasks(cmdString).run(object : ResultHandler<Void?> {
                 override fun onComplete(p0: Void?) {
-                    println("onComplete")
+                    println("QuicklyRunGradleTask onComplete")
                     GlobalScope.launch(MainUIDispatcher) {
                         loadingDialog?.close(0)
                     }
                 }
 
                 override fun onFailure(p0: GradleConnectionException?) {
-                    println("onFailure $p0")
+                    println("QuicklyRunGradleTask onFailure $p0")
+                    p0?.printStackTrace()
                     GlobalScope.launch(MainUIDispatcher) {
                         loadingDialog?.close(0)
+                        val innerException = p0?.cause?.cause?.cause
+                        if (innerException != null)
+                            LoadingDialog(
+                                e,
+                                innerException.stackTraceToString(),
+                                "Gradle Task failed to run",
+                                true
+                            ).show()
                     }
                 }
             })
