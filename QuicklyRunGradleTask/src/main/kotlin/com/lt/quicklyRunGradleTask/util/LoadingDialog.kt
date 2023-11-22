@@ -56,7 +56,7 @@ class LoadingDialog(
                                 )
                             }
                         } else
-                            Text(msg)
+                            Text(msg, Modifier.widthIn(300.dp))
                     }
                 }
             }
