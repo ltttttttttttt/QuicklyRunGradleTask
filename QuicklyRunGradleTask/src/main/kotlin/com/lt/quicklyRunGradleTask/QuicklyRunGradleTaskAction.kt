@@ -48,14 +48,12 @@ class QuicklyRunGradleTaskAction : DumbAwareAction() {
                     p0?.printStackTrace()
                     GlobalScope.launch(MainUIDispatcher) {
                         loadingDialog?.close(0)
-                        val innerException = p0?.cause?.cause?.cause
-                        if (innerException != null)
-                            LoadingDialog(
-                                e,
-                                innerException.stackTraceToString(),
-                                "Gradle Task failed to run",
-                                true
-                            ).show()
+                        LoadingDialog(
+                            e,
+                            p0?.stackTraceToString() ?: "Gradle Task failed to run, exception is null",
+                            "Gradle Task failed to run",
+                            true
+                        ).show()
                     }
                 }
             })
