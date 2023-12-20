@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "com.lt"
-version = "1.0.2"
+version = "1.0.3"
 
 repositories {
     mavenCentral()
@@ -46,7 +46,7 @@ tasks {
     // 声明 IDEA 插件的版本支持范围
     patchPluginXml {
         sinceBuild.set("222")// 213 代表 2021.3
-        untilBuild.set("232.*")// 223.* 代表 2022.3 及任意子版本
+        untilBuild.set("243.*")// 223.* 代表 2022.3 及任意子版本
     }
 
     signPlugin {
